@@ -29,7 +29,7 @@ if(Regularization=="Lasso"){
     mask[mask>0] <- 1
     W <- W*mask
 } else if (Regularization=="L21"){
-    W[1:p*0.9,] <- 0
+    W[1:p-3,] <- 0
 } else if (Regularization=="Trace"){
     requireNamespace('corpcor')
     eigen <- corpcor::fast.svd(W)
