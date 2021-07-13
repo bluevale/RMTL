@@ -212,7 +212,7 @@ calcError <- function(m, newX=NULL, newY=NULL){
     }else{stop(" no new data (X or Y) are provided ")}
 }
 
-
+# alternative: use newY (test dataset) and predictors corresponding to the nonzero rows of W to calculate a subspace projection angle for each task. 
 
 #' Plot the historical values of objective function 
 #'
