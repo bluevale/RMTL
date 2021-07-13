@@ -199,14 +199,14 @@ calcError <- function(m, newX=NULL, newY=NULL){
         stop("The first arguement is not a MTL model")}
     if(!is.null(newX) & !is.null(newY)){
         task_num <- length(newY)
-        yhat <- predict.MTL(m,newX)
+        yhat <- predict.MTL(m,newX)  # PREDICT A Y FOR tX and found W of the current itteration
         if(m$type=="Classification"){
             residue <- lapply(1:task_num, function(x)
                 newY[[x]]-(round(yhat[[x]])-0.5)*2)
             error <- sapply(residue, function(x){sum(x!=0)/length(x)})
         }else if(m$type=="Regression"){
             error <- sapply(1:task_num, function(x)
-                mean((newY[[x]]-yhat[[x]])^2))
+                mean((newY[[x]]-yhat[[x]])^2)) # MEAN OF ERROR BETWEEN ACTUAL tY and predicted Y. The problem is that the prediction assumes the same W as the train dataset. It can be changed to a subspace measurement
         }
         return(mean(error))
     }else{stop(" no new data (X or Y) are provided ")}
